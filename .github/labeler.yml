@@ -12,8 +12,7 @@ labels:
   - label: "steward"
     authors: ["softwaremill-ci"]
   - label: "automerge"
-    size:
-      below: 100
+    authors: ["micsza"]
   - label: "automerge2"
     authors: ["softwaremill-ci"]
     files:
