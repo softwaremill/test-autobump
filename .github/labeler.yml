@@ -11,10 +11,10 @@ labels:
       - "build.sbt"
   - label: "steward"
     authors: ["softwaremill-ci"]
-  - label: "S"
+  - label: "automerge"
     size:
       below: 100
-  - label: "automerge"
+  - label: "automerge2"
     authors: ["softwaremill-ci"]
     files:
       - "build.sbt"
