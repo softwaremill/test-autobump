@@ -1,0 +1,9 @@
+labels:
+  - label: "TestLabel"
+    title: ".*"
+  - label: "TestFileMatch"
+    files:
+      - "cmd/.*.go"
+      - "pkg/.*.go"
+  - label: "steward"
+    authors: ["softwaremill-ci"]
