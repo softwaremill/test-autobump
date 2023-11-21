@@ -1,3 +1,4 @@
+version: 1
 labels:
   - label: "TestLabel"
     title: ".*"
@@ -5,5 +6,9 @@ labels:
     files:
       - "cmd/.*.go"
       - "pkg/.*.go"
+      - "build.sbt"
   - label: "steward"
     authors: ["softwaremill-ci"]
+  - label: "S"
+    size:
+      below: 100
