@@ -61,7 +61,7 @@ jobs:
   ci:
     # run on external PRs, but not on internal PRs since those will be run by push to branch
 #    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
     - name: View PR author
       run: echo "------- This PR is opened by ${{ github.event.pull_request.user.login }}."
