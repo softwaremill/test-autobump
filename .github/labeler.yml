@@ -14,3 +14,8 @@ labels:
   - label: "S"
     size:
       below: 100
+  - label: "automerge"
+    authors: ["softwaremill-ci"]
+    files:
+      - "build.sbt"
+      - "project/Versions.scala"
