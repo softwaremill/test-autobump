@@ -1,0 +1,20 @@
+version: 1
+labels:
+  - label: "AnyTitleAndSmall"
+    title: ".*"
+    size:
+      below: 100
+  - label: "TestFileMatch"
+    files:
+      - "cmd/.*.go"
+      - "pkg/.*.go"
+      - "build.sbt"
+  - label: "steward"
+    authors: ["softwaremill-ci"]
+  - label: "automerge"
+    authors: ["micsza"]
+  - label: "automerge2"
+    authors: ["softwaremill-ci"]
+    files:
+      - "build.sbt"
+      - "project/Versions.scala"
