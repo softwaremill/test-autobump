@@ -1,15 +1,6 @@
 version: 1
 labels:
-  - label: "TestFileMatch"
-    files:
-      - "cmd/.*.go"
-      - "pkg/.*.go"
-      - "build.sbt"
-  - label: "steward"
-    authors: ["softwaremill-ci"]
   - label: "automerge"
-    authors: ["micsza"]
-  - label: "automerge2"
     authors: ["softwaremill-ci"]
     files:
       - "build.sbt"
