@@ -17,4 +17,10 @@ object Dependencies {
   lazy val scalaTest: Seq[ModuleID] = Seq(
     "org.scalatest" %% "scalatest" % Versions.scalaTest % Test
   )
+
+  lazy val circe = Seq(
+    "io.circe" %% "circe-core" % Versions.circe,
+    "io.circe" %% "circe-generic" % Versions.circe,
+    "io.circe" %% "circe-parser" % Versions.circe
+  )
 }
