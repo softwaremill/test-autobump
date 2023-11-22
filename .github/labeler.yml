@@ -1,9 +1,5 @@
 version: 1
 labels:
-  - label: "AnyTitleAndSmall"
-    title: ".*"
-    size:
-      below: 100
   - label: "TestFileMatch"
     files:
       - "cmd/.*.go"

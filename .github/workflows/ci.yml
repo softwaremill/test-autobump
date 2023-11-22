@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: srvaroa/labeler@master
         env:
-          GITHUB_TOKEN: "${{ secrets.REPO_GITHUB_TOKEN }}"
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
   ci:
     # run on external PRs, but not on internal PRs since those will be run by push to branch
