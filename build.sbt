@@ -18,8 +18,8 @@ lazy val core: Project = (project in file("core"))
     libraryDependencies ++=
       scalaTest ++
       cats ++
-      http4s
-
+      http4s ++
+      circe
   )
 
 addCommandAlias(
