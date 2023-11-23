@@ -30,3 +30,14 @@ jobs:
         find $HOME/.ivy2/cache                       -name "*-LM-SNAPSHOT*"       -delete || true
         find $HOME/.cache/coursier/v1                -name "ivydata-*.properties" -delete || true
         find $HOME/.sbt                              -name "*.lock"               -delete || true
+  log:
+    name: LogCI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Logging context
+        run: |
+          echo "--------------- user: ${{github.event.pull_request.user.login }}, event name: ${{ github.event_name }}, conc = ${{ github.event.workflow_run.conclusion }}."
+  automergeee:
+    if: github.event_name == 'pull_request' # && github.event.pull_request.user.login == 'softwaremill-ci'
+    needs: ci
+    uses: ./.github/workflows/automerge.yml
