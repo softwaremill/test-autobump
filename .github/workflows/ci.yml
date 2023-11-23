@@ -1,3 +1,4 @@
+# cmd | xargs to remove newlines, i.e. output will be in a single line
 name: CI
 on:
   pull_request:
@@ -8,9 +9,20 @@ on:
 jobs:
 
   label:
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
-      - uses: srvaroa/labeler@master
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+      - name: Count number of files changed
+        id: count-changed-files
+        run: |
+          diff=$(git diff --name-only -r HEAD^1 HEAD | xargs)
+          echo "changed_files_num=${#diff[@]}" >> $GITHUB_OUTPUT
+      - name: Launch labeler
+        if: steps.count-changed-files.outputs.changed_files_num == 1
+        uses: srvaroa/labeler@master
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 

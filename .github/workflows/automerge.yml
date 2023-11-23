@@ -1,5 +1,6 @@
 name: automerge
 on:
+  # TODO: remove workflow_dispatch
   workflow_dispatch:
   workflow_run:
     workflows: [CI]
@@ -7,7 +8,10 @@ on:
       - completed
 jobs:
   automerge:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: | 
+      ${{ github.event.workflow_run.conclusion == 'success' }} && \ 
+      ${{ github.event_name == 'pull_request' }} && \ 
+      ${{ github.event.pull_request.user.login == 'softwaremill-ci'}}
     runs-on: ubuntu-latest
     steps:
       - id: automerge
