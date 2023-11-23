@@ -7,11 +7,39 @@ on:
     types:
       - completed
 jobs:
+
+  log:
+    name: Log
+    runs-on: ubuntu-latest
+    steps:
+      - name: Logging context
+        run: | 
+          echo "--------------- user: ${{github.event.pull_request.user.login }}, event name: ${{ github.event_name }}, conc = ${{ github.event.workflow_run.conclusion }}."
+
+  label:
+    if: github.event.workflow_run.conclusion == 'success' && github.event_name == 'pull_request'
+    name: Attach label
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+      - name: Count number of files changed
+        id: count-changed-files
+        run: |
+          diff=$(git diff --name-only -r HEAD^1 HEAD | xargs)
+          echo "-----------changed_files_num=${#diff[@]}"
+          echo "changed_files_num=${#diff[@]}" >> $GITHUB_OUTPUT
+      - name: Launch labeler
+        if: steps.count-changed-files.outputs.changed_files_num == 1
+        uses: srvaroa/labeler@master
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
   automerge:
-    if: | 
-      github.event.workflow_run.conclusion == 'success' && 
-      github.event_name == 'pull_request' && 
-      github.event.pull_request.user.login == 'softwaremill-ci'
+#    if: github.event.pull_request.user.login == 'softwaremill-ci'
+    name: Auto merge
+    needs: label
     runs-on: ubuntu-latest
     steps:
       - id: automerge
