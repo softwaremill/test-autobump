@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Logging context
         run: |
-          echo "--------------- user: ${{github.event.pull_request.user.login }}, event name: ${{ github.event_name }}, conc = ${{ github.event.workflow_run.conclusion }}."
+          echo "------- [AM] -------- user: ${{github.event.pull_request.user.login }}, event name: ${{ github.event_name }}, conc = ${{ github.event.workflow_run.conclusion }}."
 
   label:
 #    if: github.event.workflow_run.conclusion == 'success' && github.event_name == 'pull_request'

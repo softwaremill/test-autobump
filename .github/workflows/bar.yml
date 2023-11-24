@@ -1,0 +1,13 @@
+name: BAR
+on:
+  workflow_dispatch:
+  workflow_call:
+jobs:
+  logBAR:
+    name: LogBAR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Logging context
+        run: |
+          echo "------- [BAR] -------- user: ${{github.event.pull_request.user.login }}, event name: ${{ github.event_name }}, conc = ${{ github.event.workflow_run.conclusion }}."
+
