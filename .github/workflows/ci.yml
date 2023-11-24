@@ -36,8 +36,9 @@ jobs:
     steps:
       - name: Logging context
         run: |
-          echo "--------------- user: ${{github.event.pull_request.user.login }}, event name: ${{ github.event_name }}, conc = ${{ github.event.workflow_run.conclusion }}."
-  am:
+          echo "------- [CI] -------- user: ${{github.event.pull_request.user.login }}, event name: ${{ github.event_name }}, conc = ${{ github.event.workflow_run.conclusion }}."
+  auto-merge:
+    # TODO toggle on
 #    if: github.event_name == 'pull_request' # && github.event.pull_request.user.login == 'softwaremill-ci'
     needs: ci
     uses: ./.github/workflows/automerge.yml
