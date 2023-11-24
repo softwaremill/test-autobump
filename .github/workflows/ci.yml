@@ -11,25 +11,25 @@ jobs:
     if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: Set up JDK 11
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'temurin'
-        java-version: 11
-        cache: 'sbt'
-    - name: Compile
-      run: sbt -v compile
-    - name: Test
-      run: sbt -v test
-    - name: Cleanup
-      run: |
-        rm -rf "$HOME/.ivy2/local" || true
-        find $HOME/.ivy2/cache                       -name "ivydata-*.properties" -delete || true
-        find $HOME/.ivy2/cache                       -name "*-LM-SNAPSHOT*"       -delete || true
-        find $HOME/.cache/coursier/v1                -name "ivydata-*.properties" -delete || true
-        find $HOME/.sbt                              -name "*.lock"               -delete || true
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 11
+          cache: 'sbt'
+      - name: Compile
+        run: sbt -v compile
+      - name: Test
+        run: sbt -v test
+      - name: Cleanup
+        run: |
+          rm -rf "$HOME/.ivy2/local" || true
+          find $HOME/.ivy2/cache                       -name "ivydata-*.properties" -delete || true
+          find $HOME/.ivy2/cache                       -name "*-LM-SNAPSHOT*"       -delete || true
+          find $HOME/.cache/coursier/v1                -name "ivydata-*.properties" -delete || true
+          find $HOME/.sbt                              -name "*.lock"               -delete || true
   log:
     name: LogCI
     runs-on: ubuntu-latest
@@ -37,8 +37,34 @@ jobs:
       - name: Logging context
         run: |
           echo "------- [CI] -------- user: ${{github.event.pull_request.user.login }}, event name: ${{ github.event_name }}, conc = ${{ github.event.workflow_run.conclusion }}."
+  label:
+    name: Attach automerge label
+    if: github.event_name == 'pull_request' #&& github.event.pull_request.user.login == 'softwaremill-ci'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+      # skip labelling if more than one file is changed
+      - name: Count number of files changed
+        id: count-changed-files
+        run: |
+          diff=$(git diff --name-only -r HEAD^1 HEAD | xargs)
+          echo "-----------changed_files_num=${#diff[@]}"
+          echo "changed_files_num=${#diff[@]}" >> $GITHUB_OUTPUT
+      - name: Launch labeler
+        if: steps.count-changed-files.outputs.changed_files_num == 1
+        uses: srvaroa/labeler@master
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
   auto-merge:
-    # TODO toggle on
-#    if: github.event_name == 'pull_request' # && github.event.pull_request.user.login == 'softwaremill-ci'
-    needs: ci
-    uses: ./.github/workflows/automerge.yml
+    name: Auto merge
+    if: github.event_name == 'pull_request'
+    needs: [ci, label]
+    runs-on: ubuntu-latest
+    steps:
+      - id: automerge
+        name: automerge
+        uses: "pascalgn/automerge-action@v0.15.6"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
