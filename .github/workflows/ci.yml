@@ -5,10 +5,16 @@ on:
   push:
     branches: ['**']
     tags: [v*]
+# sadly you cannot use env vars in if expression on job level
+#env:
+#  is_steward_pr: ${{ github.event.pull_request.user.login == 'softwaremill-ci' }}
 jobs:
   ci:
     # run on external PRs, but not on internal PRs since those will be run by push to branch
-    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
+    if: | 
+      github.event_name == 'push' || 
+      github.event.pull_request.head.repo.full_name != github.repository || 
+      github.event.pull_request.user.login == 'softwaremill-ci'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -30,6 +36,7 @@ jobs:
           find $HOME/.ivy2/cache                       -name "*-LM-SNAPSHOT*"       -delete || true
           find $HOME/.cache/coursier/v1                -name "ivydata-*.properties" -delete || true
           find $HOME/.sbt                              -name "*.lock"               -delete || true
+
   log:
     name: LogCI
     runs-on: ubuntu-latest
@@ -37,9 +44,11 @@ jobs:
       - name: Logging context
         run: |
           echo "------- [CI] -------- user: ${{github.event.pull_request.user.login }}, event name: ${{ github.event_name }}, conc = ${{ github.event.workflow_run.conclusion }}."
+
   label:
     name: Attach automerge label
-    if: github.event_name == 'pull_request' #&& github.event.pull_request.user.login == 'softwaremill-ci'
+    # skip fast
+    if: github.event.pull_request.user.login == 'softwaremill-ci'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -57,10 +66,12 @@ jobs:
         uses: srvaroa/labeler@master
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
   auto-merge:
     name: Auto merge
-    if: github.event_name == 'pull_request'
-    needs: [ci, label]
+    # skip fast
+    if: github.event.pull_request.user.login == 'softwaremill-ci'
+    needs: [ci]
     runs-on: ubuntu-latest
     steps:
       - id: automerge

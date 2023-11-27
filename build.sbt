@@ -19,7 +19,8 @@ lazy val core: Project = (project in file("core"))
       scalaTest ++
       cats ++
       http4s ++
-      circe
+      circe ++
+      natchez
   )
 
 addCommandAlias(

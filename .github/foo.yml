@@ -1,0 +1,38 @@
+name: FOO
+on:
+  pull_request:
+    branches: ['**']
+  push:
+    branches: ['**']
+    tags: [v*]
+
+env:
+  NAME: 'Bababab'
+  IS_PUSH: $${{ github.event_name == 'push' }}
+jobs:
+  foo-ci:
+    name: Foo CI job
+    if: IS_PUSH == 'true' #github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Foo CI step - echo
+        run: |
+          echo "------- [FOO CI] -------- is PUSH? $IS_PUSH, name: $NAME, user: ${{github.event.pull_request.user.login }}, event name: ${{ github.event_name }}, conc = ${{ github.event.workflow_run.conclusion }}."
+
+  foo-label:
+    name: Foo Label job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Foo label step - echo
+        run: |
+          echo "------- [FOO LABEL] -------- user: ${{github.event.pull_request.user.login }}, event name: ${{ github.event_name }}, conc = ${{ github.event.workflow_run.conclusion }}."
+
+  foo-am:
+    name: Foo AM job
+#    if: github.event_name == 'pull_request'
+    needs: [foo-ci]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Foo AM step - echo
+        run: |
+          echo " -------- [FOO AM ] -------- "
