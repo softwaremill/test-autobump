@@ -36,4 +36,8 @@ object Dependencies {
     "com.github.pureconfig" %% "pureconfig-core" % Versions.pureconfig,
     "com.github.pureconfig" %% "pureconfig-ip4s" % Versions.pureconfig
   )
+
+  lazy val metrics = Seq(
+    "com.avast.cloud" %% "datadog4s" % Versions.datadog4s
+  )
 }
