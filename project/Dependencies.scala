@@ -25,4 +25,10 @@ object Dependencies {
     "org.typelevel" %% "kittens"                % Versions.kittens,
     "org.typelevel" %% "cats-testkit-scalatest" % Versions.catsTestkit % Test,
   )
+
+  lazy val natchez: Seq[ModuleID] = Seq(
+    "org.tpolecat" %% "natchez-datadog" % Versions.natchez,
+    "org.tpolecat" %% "natchez-log" % Versions.natchez,
+    "org.tpolecat" %% "natchez-http4s" % Versions.natchezHttp4s
+  )
 }
