@@ -31,4 +31,9 @@ object Dependencies {
     "org.tpolecat" %% "natchez-log" % Versions.natchez,
     "org.tpolecat" %% "natchez-http4s" % Versions.natchezHttp4s
   )
+
+  lazy val pureconfig: Seq[ModuleID] = Seq(
+    "com.github.pureconfig" %% "pureconfig-core" % Versions.pureconfig,
+    "com.github.pureconfig" %% "pureconfig-ip4s" % Versions.pureconfig
+  )
 }

@@ -20,7 +20,8 @@ lazy val core: Project = (project in file("core"))
       cats ++
       http4s ++
       circe ++
-      natchez
+      natchez ++
+      pureconfig
   )
 
 addCommandAlias(
