@@ -36,7 +36,7 @@ jobs:
 
   label:
     name: Attach automerge label
-    # skip fast so that the actions output is not polluted with failed job
+    # skip fast so that the non-steward actions output is not polluted with failed job
     if: github.event.pull_request.user.login == 'softwaremill-ci'
     runs-on: ubuntu-latest
     steps:
@@ -48,7 +48,6 @@ jobs:
         id: count-changed-files
         run: |
           diff=$(git diff --name-only -r HEAD^1 HEAD | xargs)
-          echo "-----------changed_files_num=${#diff[@]}"
           echo "changed_files_num=${#diff[@]}" >> $GITHUB_OUTPUT
       - name: Launch labeler
         if: steps.count-changed-files.outputs.changed_files_num == 1
@@ -58,7 +57,7 @@ jobs:
 
   auto-merge:
     name: Auto merge
-    # skip fast so that the actions output is not polluted with failed job
+    # skip fast so that the non-steward actions output is not polluted with failed job
     if: github.event.pull_request.user.login == 'softwaremill-ci'
     needs: [ci, label]
     runs-on: ubuntu-latest
