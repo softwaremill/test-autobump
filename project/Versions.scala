@@ -10,5 +10,4 @@ object Versions {
   val natchezHttp4s = "0.5.0"
   val pureconfig = "0.17.4"
   val datadog4s = "0.32.0"
-
 }
