@@ -48,4 +48,9 @@ object Dependencies {
     "org.apache.logging.log4j" % "log4j-slf4j2-impl" % Versions.log4j2,
     "org.typelevel" %% "log4cats-slf4j" % Versions.log4cats
   )
+
+  lazy val zio = Seq(
+    "dev.zio" %% "zio" % Versions.zio,
+
+  )
 }
