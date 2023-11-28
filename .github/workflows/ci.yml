@@ -1,9 +1,7 @@
 name: CI
 on:
   pull_request:
-    branches: ['**']
   push:
-    branches: ['**']
     tags: [v*]
 jobs:
   ci:
@@ -26,13 +24,6 @@ jobs:
         run: sbt -v compile
       - name: Test
         run: sbt -v test
-      - name: Cleanup
-        run: |
-          rm -rf "$HOME/.ivy2/local" || true
-          find $HOME/.ivy2/cache                       -name "ivydata-*.properties" -delete || true
-          find $HOME/.ivy2/cache                       -name "*-LM-SNAPSHOT*"       -delete || true
-          find $HOME/.cache/coursier/v1                -name "ivydata-*.properties" -delete || true
-          find $HOME/.sbt                              -name "*.lock"               -delete || true
 
   label:
     name: Attach automerge label
@@ -47,8 +38,10 @@ jobs:
       - name: Count number of files changed
         id: count-changed-files
         run: |
-          diff=$(git diff --name-only -r HEAD^1 HEAD | xargs)
-          echo "changed_files_num=${#diff[@]}" >> $GITHUB_OUTPUT
+#          diff=$(git diff --name-only -r HEAD^1 HEAD | xargs)
+          N=$(git diff --name-only -r HEAD^1 HEAD | wc -w)
+          echo "changed_files_num=$(git diff --name-only -r HEAD^1 HEAD | wc -w)"
+          echo "changed_files_num=$N" >> $GITHUB_OUTPUT
       - name: Launch labeler
         if: steps.count-changed-files.outputs.changed_files_num == 1
         uses: srvaroa/labeler@master
