@@ -1,0 +1,24 @@
+#name: Update
+#
+#on:
+#  issue_comment:
+#    types:
+#      - created
+#
+#jobs:
+#  validate-pr-comment:
+#    if: ${{ github.event.issue.pull_request && github.event.comment.body == 'wf:' }}
+#    runs-on: ubuntu-latest
+#    steps:
+#      - run: |
+#          echo "Identified an update comment for PR $IDX."
+#        env:
+#          IDX: ${{ github.event.issue.number }}
+#
+#  update:
+#    needs: validate-pr-comment
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v3
+#        with:
+#          fetch-depth: 0
