@@ -8,4 +8,8 @@ class MySpec extends AnyFlatSpec with Matchers {
   "That" should "do too" in {
     1 + 1 should be(2)
   }
+
+  "One more" should "be fine" in {
+    1 + 0 should be(1)
+  }
 }
