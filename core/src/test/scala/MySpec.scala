@@ -14,6 +14,6 @@ class MySpec extends AnyFlatSpec with Matchers {
   }
 
   "Test1" should "be fine" in {
-    1 + 0 should be(1)
+    1 + 6 should be(7)
   }
 }
