@@ -40,4 +40,12 @@ object Dependencies {
   lazy val metrics = Seq(
     "com.avast.cloud" %% "datadog4s" % Versions.datadog4s
   )
+
+  lazy val logging = Seq(
+    "org.apache.logging.log4j" % "log4j-core" % Versions.log4j2,
+    "org.apache.logging.log4j" % "log4j-layout-template-json" % Versions.log4j2,
+    "org.apache.logging.log4j" % "log4j-slf4j-impl" % Versions.log4j2,
+    "org.apache.logging.log4j" % "log4j-slf4j2-impl" % Versions.log4j2,
+    "org.typelevel" %% "log4cats-slf4j" % Versions.log4cats
+  )
 }
