@@ -23,7 +23,8 @@ lazy val core: Project = (project in file("core"))
       natchez ++
       pureconfig ++
       metrics ++
-      logging
+      logging ++
+      zio
   )
 
 addCommandAlias(
