@@ -6,7 +6,7 @@ object Versions {
   val circe = "0.14.6"
   val kittens = "3.1.0"
   val catsTestkit = "2.1.5"
-  val natchez = "0.3.4"
+  val natchez = "0.3.5"
   val natchezHttp4s = "0.5.0"
   val pureconfig = "0.17.4"
   val datadog4s = "0.32.0"
