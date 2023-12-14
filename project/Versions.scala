@@ -12,5 +12,5 @@ object Versions {
   val datadog4s = "0.32.0"
   val log4cats = "2.6.0"
   val log4j2 = "2.22.0"
-  val zio = "2.0.19"
+  val zio = "2.0.20"
 }
