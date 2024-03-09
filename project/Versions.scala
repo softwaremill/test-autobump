@@ -4,7 +4,7 @@ object Versions {
   val http4s = "0.23.26"
   val scalaTest = "3.2.18"
   val circe = "0.14.6"
-  val kittens = "3.2.0"
+  val kittens = "3.3.0"
   val catsTestkit = "2.1.5"
   val natchez = "0.3.5"
   val natchezHttp4s = "0.5.0"
