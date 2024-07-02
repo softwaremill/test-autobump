@@ -3,7 +3,7 @@ object Versions {
   val catsEffect = "3.5.4"
   val http4s = "0.23.27"
   val scalaTest = "3.2.19"
-  val circe = "0.14.8"
+  val circe = "0.14.9"
   val kittens = "3.3.0"
   val catsTestkit = "2.1.5"
   val natchez = "0.3.5"
