@@ -12,4 +12,8 @@ class MySpec extends AnyFlatSpec with Matchers {
   "One more" should "be fine" in {
     1 + 0 should be(1)
   }
+
+  "One more again" should "be fine" in {
+    1 + 0 should be(1)
+  }
 }
