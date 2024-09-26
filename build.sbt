@@ -3,7 +3,7 @@ import Dependencies._
 
 lazy val commonSettings = commonSmlBuildSettings ++ Seq(
   organization := "com.softwaremill.xxx",
-  scalaVersion := "2.13.12"
+  scalaVersion := "2.13.15"
 )
 
 lazy val rootProject = (project in file("."))
@@ -17,14 +17,14 @@ lazy val core: Project = (project in file("core"))
     name := "core",
     libraryDependencies ++=
       scalaTest ++
-      cats ++
-      http4s ++
-      circe ++
-      natchez ++
-      pureconfig ++
-      metrics ++
-      logging ++
-      zio
+        cats ++
+        http4s ++
+        circe ++
+        natchez ++
+        pureconfig ++
+        metrics ++
+        logging ++
+        zio
   )
 
 addCommandAlias(
