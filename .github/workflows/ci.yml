@@ -38,7 +38,7 @@ jobs:
   label:
     name: Attach automerge label
     # skip fast so that the non-steward actions output is not polluted with failed job
-    if: github.event.pull_request.user.login == 'softwaremill-ci'
+#    if: github.event.pull_request.user.login == 'softwaremill-ci'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -51,7 +51,7 @@ jobs:
           echo "changed_files_num=$(git diff --name-only -r HEAD^1 HEAD | wc -w)"
           echo "changed_files_num=$N" >> $GITHUB_OUTPUT
       - name: Launch labeler
-        if: steps.count-changed-files.outputs.changed_files_num == 1
+#        if: steps.count-changed-files.outputs.changed_files_num == 1
         uses: srvaroa/labeler@master
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
