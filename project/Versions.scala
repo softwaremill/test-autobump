@@ -8,7 +8,7 @@ object Versions {
   val catsTestkit = "2.1.5"
   val natchez = "0.3.7"
   val natchezHttp4s = "0.6.0"
-  val pureconfig = "0.17.7"
+  val pureconfig = "0.17.8"
   val datadog4s = "0.32.0"
   val log4cats = "2.7.0"
   val log4j2 = "2.24.1"
