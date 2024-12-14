@@ -11,6 +11,6 @@ object Versions {
   val pureconfig = "0.17.8"
   val datadog4s = "0.32.0"
   val log4cats = "2.7.0"
-  val log4j2 = "2.24.2"
+  val log4j2 = "2.24.3"
   val zio = "2.1.13"
 }
