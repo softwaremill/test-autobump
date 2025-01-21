@@ -1,5 +1,5 @@
 object Versions {
-  val cats = "2.12.0"
+  val cats = "2.13.0"
   val catsEffect = "3.5.7"
   val http4s = "0.23.30"
   val scalaTest = "3.2.19"
