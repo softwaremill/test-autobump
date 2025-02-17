@@ -22,8 +22,8 @@ object Dependencies {
     "io.circe" %% "circe-core" % Versions.circe,
     "io.circe" %% "circe-generic" % Versions.circe,
     "io.circe" %% "circe-parser" % Versions.circe,
-    "org.typelevel" %% "kittens"                % Versions.kittens,
-    "org.typelevel" %% "cats-testkit-scalatest" % Versions.catsTestkit % Test,
+    "org.typelevel" %% "kittens" % Versions.kittens,
+    "org.typelevel" %% "cats-testkit-scalatest" % Versions.catsTestkit % Test
   )
 
   lazy val natchez: Seq[ModuleID] = Seq(
@@ -50,7 +50,6 @@ object Dependencies {
   )
 
   lazy val zio = Seq(
-    "dev.zio" %% "zio" % Versions.zio,
-
+    "dev.zio" %% "zio" % Versions.zio
   )
 }
