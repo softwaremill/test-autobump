@@ -5,3 +5,7 @@ labels:
     files:
       - "build.sbt"
       - "project/Versions.scala"
+  - label: "foo"
+    authors: ["micsza"]
+  - label: "bar"
+    authors: [ "micsza" ]
